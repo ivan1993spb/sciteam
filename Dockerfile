@@ -34,5 +34,7 @@ RUN conda install -n sci-r -y -c conda-forge \
     r-devtools=2.4.5 \
     r-ggpubr=0.6.0
 
-#RUN R -e 'devtools::install_github("stephenturner/annotables")'
-# TODO: && rm -rf /var/lib/apt/lists/*
+RUN conda run -n sci-r R --quiet -e 'devtools::install_github("stephenturner/annotables")' \
+ && conda run -n sci-r R --quiet -e 'devtools::install_github("alyssafrazee/RSkittleBrewer")'
+
+#ENTRYPOINT ["conda", "run", "-n", "sci-r", "R", "--save"]
